@@ -18,8 +18,8 @@ class _HomeState extends State<Home> {
 
     for(int i=0; i<=10; i++){
       Map<String, dynamic> item = Map();
-      item["titulo"] = "Titulo ${i} Lorem ipsum dolor sit amet.";
-      item["descricao"] = "Descrição ${i} Lorem ipsum dolor sit amet.";
+      item["titulo"] = "Titulo $i Lorem ipsum dolor sit amet.";
+      item["descricao"] = "Descrição $i Lorem ipsum dolor sit amet.";
       _itens.add(item);
     }
   }
@@ -41,6 +41,41 @@ class _HomeState extends State<Home> {
           itemBuilder: (context, indice){
             //print("item ${_itens[indice].toString()}");
             return ListTile(
+              onTap: (){
+                showDialog(
+                    context: context, 
+                    builder: (context){
+                      return AlertDialog(
+                        title: Text("${_itens[indice]["titulo"]}"),
+                        titlePadding: const EdgeInsets.all(40),
+                        titleTextStyle: const TextStyle(
+                          fontSize: 25,
+                          fontWeight: FontWeight.w900,
+                          color: Colors.white
+                        ),
+                        backgroundColor: Colors.blue,
+                        content: Text("${_itens[indice]["descricao"]}"),
+                        actions: [
+                          ElevatedButton(
+                            onPressed: (){
+                              print("sim");
+                              Navigator.pop(context);
+                            },
+                            child: const Text("sim"),
+                          ),
+                          ElevatedButton(
+                            onPressed: (){
+                              print("não");
+                              Navigator.pop(context);
+                            },
+                            child: const Text("não"),
+                          ),
+                        ],
+
+                      );
+                    },
+                );
+              },
               title: Text( _itens[indice]["titulo"].toString()),
               subtitle: Text(_itens[indice]["descricao"].toString()),
             );
