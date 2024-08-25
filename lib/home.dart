@@ -14,11 +14,21 @@ class _HomeState extends State<Home> {
 
   void _carregarItens(){
 
+    _itens = [];
 
+    for(int i=0; i<=10; i++){
+      Map<String, dynamic> item = Map();
+      item["titulo"] = "Titulo ${i} Lorem ipsum dolor sit amet.";
+      item["descricao"] = "Descrição ${i} Lorem ipsum dolor sit amet.";
+      _itens.add(item);
+    }
   }
 
   @override
   Widget build(BuildContext context) {
+
+    _carregarItens();
+
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -27,12 +37,12 @@ class _HomeState extends State<Home> {
       body: Container(
         padding: const EdgeInsets.all(20),
         child: ListView.builder(
-          itemCount: 5,
+          itemCount: _itens.length,
           itemBuilder: (context, indice){
-            print("item ${indice}");
+            //print("item ${_itens[indice].toString()}");
             return ListTile(
-              title: Text( indice.toString()),
-              subtitle: const Text("subtitulo"),
+              title: Text( _itens[indice]["titulo"].toString()),
+              subtitle: Text(_itens[indice]["descricao"].toString()),
             );
           },
         ),
